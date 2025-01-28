@@ -16,7 +16,7 @@ class Filter
     public function handle(Request $request, Closure $next): Response
     {
         $apiKey = $request->header('X-API-Key');
-        $expectedApiKey = env('API_KARDEX_KEY');
+        $expectedApiKey = env('MICROSERVICE_KEY');
         if ($apiKey !== $expectedApiKey) {
             return response()->json([
             'message' => 'Acceso denegado. Clave API incorrecta.'], 403);

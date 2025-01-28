@@ -16,13 +16,12 @@ use App\Http\Controllers\GenreController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('filtro')->group(function () { //El error se debia al alias del middleware
+    Route::get('/bands', [BandController::class, 'index']);
+    Route::get('/bands/{id}', [BandController::class, 'show']);
+    Route::post('/bands', [BandController::class, 'store']);
+
+    Route::get('/genres', [GenreController::class, 'index']);
+    Route::get('/genres/{id}', [GenreController::class, 'show']);
 });
 
-Route::get('/bands', [BandController::class, 'index']);
-Route::get('/bands/{id}', [BandController::class, 'show']);
-Route::post('/bands', [BandController::class, 'store']);
-
-Route::get('/genres', [GenreController::class, 'index']);
-Route::get('/genres/{id}', [GenreController::class, 'show']);
